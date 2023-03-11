@@ -58,7 +58,7 @@ app.get("/", function (req, res) {
       });
       res.redirect("/");
     } else {
-      res.render("list", { listTitle: "Today", newListItems: foundItems });
+      res.render("list", { listTitle: "Latest", newListItems: foundItems });
     }
   });
 });
@@ -94,7 +94,7 @@ app.post("/", function (req, res) {
 
   if (listName === "Latest") {
     item.save();
-    res.redirect("/" + listName);
+    res.redirect("/");
   } else {
     List.findOne({ name: listName }, function (err, foundList) {
       foundList.items.push(item);
@@ -108,7 +108,7 @@ app.post("/delete", function (req, res) {
   const checkedItemId = req.body.checkbox;
   const listName = req.body.listName;
 
-  if (listName === "Today") {
+  if (listName === "Latest") {
     Item.findByIdAndRemove(checkedItemId, function (err) {
       if (!err) {
         console.log("Successfully deleted checked item.");
