@@ -92,9 +92,9 @@ app.post("/", function (req, res) {
     name: itemName
   });
 
-  if (listName === "Today") {
+  if (listName === "Latest") {
     item.save();
-    res.redirect("/");
+    res.redirect("/" + listName);
   } else {
     List.findOne({ name: listName }, function (err, foundList) {
       foundList.items.push(item);
